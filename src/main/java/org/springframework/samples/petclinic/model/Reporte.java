@@ -54,7 +54,6 @@ public class Reporte extends BaseEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_user")
-	@NotEmpty
 	private Owner owner;
 
 	public String getDelito() {

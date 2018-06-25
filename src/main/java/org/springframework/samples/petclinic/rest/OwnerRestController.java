@@ -52,6 +52,7 @@ public class OwnerRestController {
 
 	@Autowired
 	private ClinicService clinicService;
+	private Login user;
 
 	@RequestMapping(value = "/*/lastname/{lastName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Collection<Owner>> getOwnersList(@PathVariable("lastName") String ownerLastName) {
@@ -124,18 +125,31 @@ public class OwnerRestController {
 		
 		System.out.println("Imprimiendo los entrantes :" + login);
 		
-		Login user = new Login();
+		user = new Login();
 		user = this.clinicService.findAddress(login.getAddress());
 		System.out.println("Imprimiendo data :" + user);
+		System.out.println("Imprimiendo form :" + login);
 		
-		if (login.getAddress() == user.getAddress() && login.getPassword() == user.getPassword()) {
-			System.out.println("Credencial valido");
+		if( user.equals(null)) {
 			System.out.println("Credencial invalido");
-			return new ResponseEntity<Login>(headers, HttpStatus.BAD_REQUEST);		
+			user.setId(null);
+			user.setPassword(null);
+			user.setAddress("invalido");
 		} else {
-			headers.setLocation(ucBuilder.path("/api/welcome").buildAndExpand(2).toUri());
-			return new ResponseEntity<Login>(user, headers, HttpStatus.CREATED);
+			System.out.println("data no nulo");
+			
+			if (login.getAddress().equals(user.getAddress()) && login.getPassword().equals(user.getPassword())) {
+				System.out.println("Credencial valido");
+				headers.setLocation(ucBuilder.path("/api/welcome").buildAndExpand(2).toUri());
+			} else {
+				System.out.println("Credencial invalido");
+				user.setId(null);
+				user.setPassword(null);
+				user.setAddress("invalido");
+				return new ResponseEntity<Login>(headers, HttpStatus.BAD_REQUEST);	
+			}
 		}
+		return new ResponseEntity<Login>(user, headers, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/{ownerId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

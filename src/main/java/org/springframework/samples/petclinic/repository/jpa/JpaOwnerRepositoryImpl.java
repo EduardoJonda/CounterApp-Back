@@ -38,7 +38,7 @@ import org.springframework.stereotype.Repository;
  * @author Vitaliy Fedoriv
  */
 @Repository
-@Profile("jpa")
+@Profile("asdad")
 public class JpaOwnerRepositoryImpl implements OwnerRepository {
 
     @PersistenceContext

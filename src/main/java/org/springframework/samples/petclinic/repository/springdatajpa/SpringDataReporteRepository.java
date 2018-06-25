@@ -8,7 +8,7 @@ import org.springframework.samples.petclinic.model.Reporte;
 import org.springframework.samples.petclinic.repository.ReporteRepository;
 
 @Profile("spring-data-jpa")
-public interface SpringDataReporteRepository extends ReporteRepository, Repository<Reporte, Integer>{
+public interface SpringDataReporteRepository extends ReporteRepository, Repository<Reporte, Integer>, ReporteRepositoryOverride{
 	
     @Override
     @Query("SELECT reporte FROM Reporte reporte WHERE reporte.id =:id")
