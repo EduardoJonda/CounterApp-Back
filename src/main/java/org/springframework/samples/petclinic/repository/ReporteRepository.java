@@ -9,6 +9,10 @@ public interface ReporteRepository {
 
 	Collection<Reporte> findAll() throws DataAccessException;
 	
+	Collection<Reporte> findByEstado(String estado ) throws DataAccessException;
+	
+	Collection<Reporte> findByTipoDelito(String tipo_delito ) throws DataAccessException;
+	
 	Reporte findById(int id) throws DataAccessException;
 	
 	void save(Reporte reporte) throws DataAccessException;

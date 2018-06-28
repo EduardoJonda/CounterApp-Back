@@ -327,4 +327,15 @@ public class ClinicServiceImpl implements ClinicService {
 		reporteRepository.delete(reporte);
 	}
 
+	@Override
+	public Collection<Reporte> findReporteByEstado(String estado) throws DataAccessException {
+		return reporteRepository.findByEstado(estado);
+	}
+
+	@Override
+	public Collection<Reporte> findReporteByReporteTipoDelito(String tipo_delito) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return reporteRepository.findByTipoDelito(tipo_delito);
+	}
+
 }

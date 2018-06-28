@@ -78,4 +78,6 @@ public interface ClinicService {
 	Reporte findReporteById(int id) throws DataAccessException;
 	void saveReporte(Reporte reporte) throws DataAccessException;
 	void deleteReporte(Reporte reporte) throws DataAccessException;
+	Collection<Reporte> findReporteByEstado(String estado) throws DataAccessException;
+	Collection<Reporte> findReporteByReporteTipoDelito(String tipo_delito) throws DataAccessException;
 }

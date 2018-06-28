@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.rest;
 
+import java.util.Collection;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -24,6 +26,30 @@ public class ReporteRestController {
 	
 	@Autowired
 	private ClinicService clinicService;
+	
+	@RequestMapping(value = "/reportes/estado/pendiente", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Collection<Reporte>> getReportePendiente() {
+		
+		System.out.println("Peticion de estado pendiente");
+		String estado = "pendiente";
+		Collection<Reporte> reports = this.clinicService.findReporteByEstado(estado);
+		if (reports.isEmpty()) {
+			return new ResponseEntity<Collection<Reporte>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Collection<Reporte>>(reports, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/reportes/estado/aprobado", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Collection<Reporte>> getReporteAprobado() {
+		
+		System.out.println("Peticion de estado Aprobado");
+		String estado = "Aprobado";
+		Collection<Reporte> reports = this.clinicService.findReporteByEstado(estado);
+		if (reports.isEmpty()) {
+			return new ResponseEntity<Collection<Reporte>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Collection<Reporte>>(reports, HttpStatus.OK);
+	}
 	
 	@RequestMapping(value = "/reportes/{reporteId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Reporte> getReporte(@PathVariable("reporteId") int reporteId) {
