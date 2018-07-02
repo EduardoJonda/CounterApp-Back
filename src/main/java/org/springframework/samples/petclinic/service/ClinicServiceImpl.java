@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.service;
 
+import java.util.Date;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -336,6 +337,18 @@ public class ClinicServiceImpl implements ClinicService {
 	public Collection<Reporte> findReporteByReporteTipoDelito(String tipo_delito) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return reporteRepository.findByTipoDelito(tipo_delito);
+	}
+
+	@Override
+	public Collection<Reporte> findReporteByReporteRegion(String ubicacion) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return reporteRepository.findByRegion(ubicacion);
+	}
+
+	@Override
+	public Collection<Reporte> findReporteByReporteFecha(String fecha_creacion) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return reporteRepository.findByFecha(fecha_creacion);
 	}
 
 }

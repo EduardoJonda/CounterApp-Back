@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.service;
 
+import java.util.Date;
 import java.util.Collection;
 
 import org.springframework.dao.DataAccessException;
@@ -80,4 +81,6 @@ public interface ClinicService {
 	void deleteReporte(Reporte reporte) throws DataAccessException;
 	Collection<Reporte> findReporteByEstado(String estado) throws DataAccessException;
 	Collection<Reporte> findReporteByReporteTipoDelito(String tipo_delito) throws DataAccessException;
+	Collection<Reporte> findReporteByReporteRegion(String ubicacion) throws DataAccessException;
+	Collection<Reporte> findReporteByReporteFecha(String fecha_creacion) throws DataAccessException;
 }
